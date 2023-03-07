@@ -1,0 +1,12 @@
+.img{
+max-width: 200px;
+max-height: 200px;
+}
+
+
+@include dialog.core-styles;
+.alert-danger{
+    padding: .3rem .5rem;
+    font-size: .9rem;
+    font-weight: 500;
+}

@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title">Delete Confirm</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="modal-body">
+  <p>Are You Sure To Delete : {{ data?.name }}!</p>
+  <p>{{ additionalData }}</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="onDelete()">
+    Delete
+  </button>
+  <button
+    type="button"
+    class="btn btn-dark"
+    (click)="activeModal.close('Close click')"
+  >
+    Close
+  </button>
+</div>

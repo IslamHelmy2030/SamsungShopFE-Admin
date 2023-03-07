@@ -1,0 +1,178 @@
+<form [formGroup]="signUpForm">
+  <div class="modal-header">
+    <h4 class="modal-title">{{title}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+
+    <div class="cross-validation" [class.cross-validation-error]="
+          signUpForm.errors &&
+          (signUpForm.touched || signUpForm.dirty)
+        ">
+      <!-- 2 column grid layout with text inputs for the first and last names -->
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="form-outline">
+            <label class="form-label" for="fName">
+              First Name
+            </label>
+            <input formControlName="firstName" type="text" id="fName" class="form-control" />
+
+            <div *ngIf="
+                  f.firstName.invalid &&
+                  ( f.firstName?.dirty ||  f.firstName?.touched)
+                " class="alert alert-danger">
+              <div *ngIf="f.firstName.errors?.required">
+                This field is required
+              </div>
+              <div *ngIf="f.firstName.errors?.['minlength']">
+                This filed should be at least 3 characters
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-outline">
+            <label class="form-label" for="lName">
+              Last Name
+            </label>
+            <input formControlName="lastName" type="text" id="lName" class="form-control" />
+
+            <div *ngIf="
+                f.lastName?.invalid &&
+                  ( f.lastName?.dirty ||  f.lastName?.touched)
+                " class="alert alert-danger">
+              <div *ngIf=" f.lastName.errors?.required">
+                This field is required
+              </div>
+              <div *ngIf=" f.lastName.errors?.['minlength']">
+                This filed should be at least 3 characters
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-4">
+          <div class="form-outline">
+            <label class="form-label" for="phoneNumber">
+              Phone Number
+            </label>
+            <input formControlName="phoneNumber" type="tel" id="phoneNumber" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-outline">
+            <label class="form-label" for="birthdate">BirthDate</label>
+            <input formControlName="birthdate" type="date" id="birthdate" class="form-control" />
+            <div *ngIf="
+              f.birthdate?.invalid &&
+                ( f.birthdate?.dirty ||  f.birthdate?.touched)
+              " class="alert alert-danger">
+              <div *ngIf=" f.birthdate.errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="address">Address</label>
+        <input formControlName="address" type="text" id="address" class="form-control" />
+
+        <div *ngIf="
+            f.address?.invalid && (f.ddress?.dirty || f.address?.touched)
+            " class="alert alert-danger">
+          <div *ngIf="f.address.errors?.required">
+            This field is required
+          </div>
+        </div>
+      </div>
+
+      <!-- Email input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="email">Email</label>
+        <input formControlName="email" type="email" id="email" class="form-control" autocomplete="new-email" />
+
+        <div *ngIf="f.email?.invalid && (f.email?.dirty || f.email?.touched)" class="alert alert-danger">
+          <div *ngIf="f.email.errors?.required">
+            This field is required
+          </div>
+          <div *ngIf="f.email.errors?.email">
+            The Email is invalid
+          </div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="confirmEmail">Confirm Email</label>
+        <input formControlName="confirmEmail" type="email" id="confirmEmail" class="form-control" />
+
+        <div *ngIf="
+            f.confirmEmail?.invalid &&
+              (f.confirmEmail?.dirty || f.confirmEmail?.touched)
+            " class="alert alert-danger">
+          <div *ngIf="f.confirmEmail.errors?.required">
+            This field is required
+          </div>
+
+          <div *ngIf="f.confirmEmail.errors?.mustMatch">
+            Email must match
+          </div>
+          <div *ngIf="f.email.errors?.email">
+            The Email is invalid
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="password">Password</label>
+        <input formControlName="password" type="password" id="password" class="form-control"
+          autocomplete="new-password" />
+
+        <div *ngIf="
+            f.password?.invalid &&
+              (f.password?.dirty || f.password?.touched)
+            " class="alert alert-danger">
+          <div *ngIf="f.password.errors?.required">
+            This field is required
+          </div>
+          <div *ngIf="f.password.errors?.['minlength']">
+            This filed should be at least 6 characters
+          </div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="confirmPassword">Confirm Password</label>
+        <input formControlName="confirmPassword" type="password" id="confirmPassword" class="form-control" />
+        <div *ngIf="f.confirmPassword?.invalid && (f.confirmPassword?.dirty || f.confirmPassword?.touched)"
+          class="alert alert-danger">
+          <div *ngIf="f.confirmPassword.errors?.required">
+            This field is required
+          </div>
+          <div *ngIf="f.confirmPassword.errors?.mustMatch">
+            Password must match
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary" (click)="onAdd()">
+      Add
+    </button>
+    <button type="button" class="btn btn-dark" (click)="activeModal.close('Close click')">
+      Close
+    </button>
+  </div>
+</form>

@@ -1,0 +1,29 @@
+
+<div class="pagetitle">
+    <h1>Users</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a [routerLink]="''">Home</a></li>
+        <li class="breadcrumb-item active">Users</li>
+      </ol>
+    </nav>
+  </div>
+  <!-- End Page Title -->
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" [destroyOnHide]="false" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Admin Users</a>
+      <ng-template ngbNavContent>
+       <app-admin-users-list></app-admin-users-list>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>Client Users</a>
+      <ng-template ngbNavContent>
+        <app-client-users-list></app-client-users-list>
+      </ng-template>
+    </li>
+ 
+  </ul>
+  
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  

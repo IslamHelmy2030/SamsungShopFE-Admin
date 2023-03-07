@@ -1,0 +1,145 @@
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Category Form</h5>
+
+    <!-- General Form Elements -->
+    <form [formGroup]="category">
+      <div class="row mb-3">
+        <label for="inputText" class="col-sm-2 col-form-label"
+          >Category Name</label
+        >
+        <div class="col-sm-10">
+          <input type="text" class="form-control" formControlName="name" />
+
+          <div
+            *ngIf="f.name?.invalid && (f.name?.dirty || f.name?.touched)"
+            class="alert alert-danger"
+          >
+            <div *ngIf="f.name.errors?.['required']">
+              This filed is required
+            </div>
+            <div *ngIf="f.name.errors?.['minlength']">
+              This filed should be at least 3 characters
+            </div>
+            <div *ngIf="f.name.errors?.['maxlength']">
+              This filed should be max 50 characters
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="form-check-label col-sm-2" for="flexCheckDefault">
+          Is Visible
+        </label>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input
+              (change)="checked()"
+              class="form-check-input"
+              type="checkbox"
+              value=""
+              id="flexCheckDefault"
+              formControlName="isVisible"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3" *ngIf="!isView">
+        <label for="inputNumber" class="col-sm-2 col-form-label"
+          >Upload Main Image</label
+        >
+        <div class="col-sm-10">
+          <input
+            class="form-control"
+            formControlName="imageFile"
+            type="file"
+            accept="image/jpeg"
+            (change)="selectMainImage($event)"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="card">
+          <div class="card-header">Image</div>
+          <div class="card-group">
+            <div class="list-group list-group-flush m-2" *ngIf="imageSrc">
+              <a
+                *ngIf="!isView"
+                href="javascript:void(0)"
+                style="cursor: pointer"
+                (click)="deleteMainImage()"
+              >
+                Delete
+              </a>
+              <img
+                class="card-img-top"
+                src="{{ imageSrc }}"
+                alt="{{ imageSrc }}"
+                height="100px"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+          <textarea
+            class="form-control"
+            formControlName="description"
+            style="height: 100px"
+          ></textarea>
+          <div
+            *ngIf="
+              f.description?.invalid &&
+              (f.description?.dirty || f.description?.touched)
+            "
+            class="alert alert-danger"
+          >
+            <div *ngIf="f.description.errors?.['minlength']">
+              This filed should be at least 3 characters
+            </div>
+            <div *ngIf="f.description.errors?.['maxlength']">
+              This filed should be max 500 characters
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-sm-10 text-center">
+          <button
+            type="button"
+            class="btn btn-secondary m-2"
+            (click)="backButton()"
+          >
+            Back
+          </button>
+
+          <button
+            [hidden]="isView"
+            type="submit"
+            class="btn btn-primary"
+            (click)="submitCategory()"
+          >
+            Submit Form
+          </button>
+        </div>
+      </div>
+    </form>
+    <!-- End General Form Elements -->
+  </div>
+</div>
